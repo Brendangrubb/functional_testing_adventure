@@ -1,0 +1,45 @@
+<?php
+
+    function titlecase_menu() {
+        $items['titlecase'] = array(
+            'title' => 'titlecase',
+            'page callback' => 'drupal_get_form',
+            'page arguments' => array('titlecase_form'),
+            'access callback' => TRUE,
+            'type' => MENU_NORMAL_ITEM,
+        );
+        $items['titlecase_success'] = array(
+            'title' => 'See? Told ya, titled as a mutha',
+            'page callback' => 'titlecase_results',
+            'access callback' => TRUE,
+            'type' => MENU_CALLBACK,
+        );
+        return $items;
+    }
+
+    function titlecase_form() {
+        $form['phrase'] = array(
+            '#title' => 'Enter a Phrase',
+            '#type' => 'textfield',
+            '#description' => t('Add a word or phrase you would like to see in titlecase.'),
+            '#required' => TRUE,
+        );
+        $form['submit'] = array(
+            '#type' => 'submit',
+            '#value' => 'Titleify!',
+        );
+        return $form;
+    }
+
+    function titlecase_form_submit($form, &$form_state) {
+        $phrase = $form_state['values']['phrase'];
+        $phrase_titlecased = ucwords($phrase);
+        $_SESSION['phrase_titlecased'] = $phrase_titlecased;
+        $form_state['redirect'] = 'titlecase_success';
+
+    }
+
+    function titlecase_results() {
+        $phrase_titlecased = $_SESSION['phrase_titlecased'];
+        return '<p> Here\'s your phrase, titeified as a motherfucker: <br><strong>' . $phrase_titlecased . '</strong></p>';
+    }

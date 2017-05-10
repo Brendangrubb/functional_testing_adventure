@@ -1,0 +1,6 @@
+name = titlecase
+description = A module to turn a string into title case
+package = Epicodus Functional Testing Modules
+core = 7.x
+files[] = titlecase.module
+files[] = tests/titlecase.test
