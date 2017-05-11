@@ -1,0 +1,8 @@
+name = Greeting
+description = Display greetings.
+package = Epicodus Functional Testing Modules
+
+core = 7.x
+files[] = greeting.module
+files[] = greeting.test
+dependencies[] = simpletest
